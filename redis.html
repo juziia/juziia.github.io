@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>redis.md</title><link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}#write, body { height: auto; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write ol, #write p, #write ul { position: relative; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+.CodeMirror, .md-fences, table { text-align: left; }
+.md-reset, a:active, a:hover { outline: 0px; }
+.md-reset, .md-toc-item a { text-decoration: none; }
+.MathJax_SVG, .md-reset { float: none; direction: ltr; }
+:root { --bg-color:#ffffff; --text-color:#333333; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; word-break: normal; word-wrap: break-word; padding-bottom: 70px; white-space: pre-wrap; overflow-x: visible; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > blockquote:first-child, #write > div:first-child, #write > ol:first-child, #write > p:first-child, #write > pre:first-child, #write > table:first-child, #write > ul:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.typora-export p { white-space: normal; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+#write > figure:first-child { margin-top: 16px; }
+figure { overflow-x: auto; margin: -8px 0px 0px -8px; max-width: calc(100% + 16px); padding: 8px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; }
+.CodeMirror-line, .md-fences { break-inside: avoid; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; margin-right: 4px; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.md-fences { font-size: 0.9rem; display: block; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; vertical-align: top; background: 0px 0px; text-shadow: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; }
+.md-toc-inner, a img, img a { cursor: pointer; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: nowrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+.md-line > .md-image:only-child, p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+.mathjax-block:not(:empty)::after, .md-toc-content::after, .md-toc::after { display: none; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.MathJax_SVG, .mathjax-block .MathJax_SVG_Display { text-indent: 0px; max-width: none; max-height: none; min-height: 0px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+.md-tag { opacity: 0.5; }
+code, pre, tt { font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0px; position: relative; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; min-width: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.md-diagram-panel > svg, [lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 20px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+body > :first-child { margin-top: 0px !important; }
+body > :last-child { margin-bottom: 0px !important; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border-width: 0px 0px 1px; border-style: none none solid; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; overflow: hidden; box-sizing: content-box; border-bottom-color: rgb(221, 221, 221); }
+body > h2:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child + h2 { margin-top: 0px; padding-top: 0px; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child { margin-top: 0px; padding-top: 0px; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 { margin-top: 0px; padding-top: 0px; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0px; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(221, 221, 221); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(204, 204, 204); margin: 0px; padding: 0px; }
+table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); }
+.md-fences, code, tt { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media screen and (min-width: 914px) {
+}
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; color: inherit; }
+.md-tag { color: inherit; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+#md-notification::before { top: 10px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+
+
+
+
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h4" data-ref="n1206"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1206">Redis</a></span><span class="md-toc-item md-toc-h4" data-ref="n12"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n12">Redis的value 5种数据类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n34"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n34">string 类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n97"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n97">Hash 类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n116"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n116">list 类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n131"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n131">set 类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n142"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n142">sorted_set类型</a></span><span class="md-toc-item md-toc-h5" data-ref="n159"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n159">通用命令</a></span><span class="md-toc-item md-toc-h5" data-ref="n176"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n176">Redis数据库操作</a></span><span class="md-toc-item md-toc-h4" data-ref="n191"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n191">Redis的单线程与高性能</a></span><span class="md-toc-item md-toc-h4" data-ref="n200"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n200">Redis的持久化</a></span><span class="md-toc-item md-toc-h5" data-ref="n206"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n206">RDB快照</a></span><span class="md-toc-item md-toc-h5" data-ref="n219"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n219">AOF</a></span><span class="md-toc-item md-toc-h5" data-ref="n260"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n260">RDB 与 AOF 的对比</a></span><span class="md-toc-item md-toc-h5" data-ref="n267"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n267">Redis 4.0 混合持久化</a></span><span class="md-toc-item md-toc-h4" data-ref="n287"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n287">缓存淘汰策略</a></span><span class="md-toc-item md-toc-h4" data-ref="n319"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n319">过期数据删除策略</a></span><span class="md-toc-item md-toc-h4" data-ref="n331"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n331">Redis集群方案</a></span><span class="md-toc-item md-toc-h5" data-ref="n334"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n334">主从复制(读写分离)</a></span><span class="md-toc-item md-toc-h5" data-ref="n368"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n368">哨兵模式(Sentinel)</a></span><span class="md-toc-item md-toc-h5" data-ref="n400"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n400">集群模式(cluster)</a></span><span class="md-toc-item md-toc-h4" data-ref="n476"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n476">Redis 名字介绍</a></span><span class="md-toc-item md-toc-h5" data-ref="n500"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n500">缓存预热</a></span><span class="md-toc-item md-toc-h5" data-ref="n567"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n567">缓存雪崩</a></span><span class="md-toc-item md-toc-h5" data-ref="n574"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n574">缓存击穿</a></span><span class="md-toc-item md-toc-h5" data-ref="n603"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n603">缓存穿透</a></span></p></div><p>&nbsp;</p><h4><a name='header-n1206' class='md-header-anchor '></a>Redis</h4><blockquote><p>Redis(Remote Dictionary Server) : 是一款用C语言开发的高性能键值对数据库</p></blockquote><ul><li><p>Nosql (非关系型)</p><p>Redis是一款Nosql数据库</p></li></ul><h4><a name='header-n12' class='md-header-anchor '></a>Redis的value 5种数据类型</h4><p>Redis的key是string类型</p><figure><table><thead><tr><th>数据类型</th><th>数据结构</th></tr></thead><tbody><tr><td>string</td><td>字符串</td></tr><tr><td>list</td><td>双向链表</td></tr><tr><td>set</td><td>HashSet 不可重复</td></tr><tr><td>hash</td><td>HashMap</td></tr><tr><td>sorted_set</td><td>不可重复.可排序的set</td></tr></tbody></table></figure><h5><a name='header-n34' class='md-header-anchor '></a>string 类型</h5><ul><li><p>添加/修改</p><p>set    key   value   <br/></p></li></ul><blockquote><p>case:     set  zhangsan  20</p></blockquote><ul><li><p>删除   		</p><p>del    key            <br/></p></li></ul><blockquote><p>case:     del  zhangsan</p></blockquote><ul><li><p>查询               <br/></p><p>get   key</p></li></ul><blockquote><p>case:      get  zhangsan</p></blockquote><ul><li><p>对key自增一</p><p>incr key<br/></p></li><li><p>对key增加指定的数值</p><p>incrby key  number<br/></p></li><li><p>对key自减一</p><p>​    decr key</p></li><li><p>减去指定数值</p><p>​    decrby key</p></li><li><p>添加数据并且指定存活时间</p><p>setex key ttl value</p></li><li><p>有值不操作, 没有则添加数据</p><p>setnx key value</p></li></ul><p>Redis中所有的操作都是原子性的, 因为Redis采用单线程处理所有任务,所以不存在线程安全问题</p><p>&nbsp;</p><h5><a name='header-n97' class='md-header-anchor '></a>Hash 类型</h5><p>增加/修改数据:    hset key field value</p><p>删除数据： hdel key field </p><p>获取所有数据:    hgetall key</p><p>获取数据:     hget key field</p><p>添加多条数据:        hmset  key field value field value ....</p><p>获取key对应的field数量  hlen key</p><p>有值则不操作,没有值则添加数据:  hsetnx  key field value;</p><p>获取所有的field:               hkeys key</p><p>&nbsp;</p><h5><a name='header-n116' class='md-header-anchor '></a>list 类型</h5><p>头部添加        lpush key  value</p><p>尾部添加        rpush key value</p><p>从头部获取数据并删除     lpop   key</p><p>从尾部获取数据并删除     lpop   key</p><p>获取所有数据         lrange key 0 -1</p><p>获取key中元素数量        llen key</p><p>&nbsp;</p><h5><a name='header-n131' class='md-header-anchor '></a>set 类型</h5><p>添加数据          sadd  key value</p><p>删除数据          srem   key value</p><p>获取全部数据      smembers  key</p><p>判断数据是否在集合中     sismember key  value</p><p>&nbsp;</p><h5><a name='header-n142' class='md-header-anchor '></a>sorted_set类型</h5><p>添加数据       zadd key score value</p><p>删除数据       zrem  key value</p><p>获取全部数据并显示socre值[升序]      zrange key 0 -1 withscores</p><p>获取全部数据并显示scoree值[降序]      zrevrange  key 0 -1 withscores;</p><p>增加score值          zincrby key number value</p><p>获取score值           zscore  key  value</p><p>&nbsp;</p><p>&nbsp;</p><h5><a name='header-n159' class='md-header-anchor '></a>通用命令</h5><p>删除指定key         del key</p><p>判断key是否存在    exists  key</p><p>获取key的类型         type key</p><p>为指定key设置有效时间        expires   key  time</p><p>获取key的有效时间                ttl key</p><p>将key设置为永久性的             persist  key</p><p>keys pattern                   根据规则获取key</p><p>&nbsp;</p><h5><a name='header-n176' class='md-header-anchor '></a>Redis数据库操作</h5><p>切换数据库             select index</p><p>退出                         quit </p><p>测试连接                 ping</p><p>将当前数据库清空       flushdb</p><p>将所有数据库清空        flushall</p><p>查看当前数据库有多少个key     dbsize</p><p>&nbsp;</p><h4><a name='header-n191' class='md-header-anchor '></a>Redis的单线程与高性能</h4><ul><li><p>Redis为什么这么快?</p><p>​     因为Redis的所有数据都是在内存中,所有的运算都是内存级别的运算,而且Redis采用单线程工作,避免了多线程的切换性能损耗问题</p><p>​</p></li></ul><h4><a name='header-n200' class='md-header-anchor '></a>Redis的持久化</h4><blockquote><p>在Redis中有两种持久化方式 分别是 RDB 和  AOF </p></blockquote><p>&nbsp;</p><h5><a name='header-n206' class='md-header-anchor '></a>RDB快照</h5><ul><li>在默认情况下, Redis将内存中的数据以快照的方式保存在名字为dump.rdb的二进制文件中</li></ul><p>​   <br/></p><p>​     RDB采用的命令是bgsave指令, 此指令会将内存中的数据在后台以快照形式保存在rdb二进制文件中</p><p>​     可以在redis.conf文件中对RDB持久化方式进行配置</p><p>​  <br/></p><h5><a name='header-n219' class='md-header-anchor '></a>AOF</h5><ul><li>以日志的方式记录每一次修改数据的命令到aof文件中,当redis重启时执行aof文件中的命令即可达到恢复数据的目的</li></ul><p>在redis.conf 文件中开启此功能</p><p>​	appendonly   yes</p><p> <br/></p><p>AOF 写数据三种策略</p><ul><li>always (每次):  每次修改数据的指令都会持久化到aof文件中,数据零误差,但效率低</li><li>everysec(每秒):  每秒将缓冲区的指令持久化到aof文件中,数据准确性高, 最多丢失一秒数据</li><li>no(系统控制):  由操作系统每次同步到aof文件的周期</li></ul><p>AOF重写(bgrewriteaof)</p><p>​	AOF文件重写就是将对同一个数据的多个操作执行的结果转换为最终结果数据对应的指令进行记录</p><p>AOF重写作用</p><p>​	① 节省磁盘空间  ② 提高持久化效率,降低持久化写的时间 ③ 提高数据恢复时的效率</p><p>AOF重写规则</p><p>​	① 已过期的数据不再写入文件</p><p>​	② 忽略无效指令</p><p>​	③ 对同一条数据的多个写命令合并为一个命令</p><p>&nbsp;</p><h5><a name='header-n260' class='md-header-anchor '></a>RDB 与 AOF 的对比</h5><p>RDB持久化方式以内存快照的形式保存,非常便于进行数据的恢复,但是可能会丢失一定的数据</p><p>AOF持久化方式当配置为everysec的策略时,只会丢失一秒的数据,数据准确性高,但是当redis进行数据恢复时,AOF持久化恢复数据要比RDB慢很多</p><p>&nbsp;</p><h5><a name='header-n267' class='md-header-anchor '></a>Redis 4.0 混合持久化</h5><blockquote><p>重启Redis时, 我们很少使用RDB来恢复数据, 因为可能会丢失大量数据,所以通常采用AOF日志重放,但是重放AOF日志性能要比RDB慢的多, 当数据量很大时,启动需要花费很长时间来恢复数据, 所以Redis 4.0解决这个问题所带来一个新的持久化方案:  混合持久化</p></blockquote><p>&nbsp;</p><ul><li><p>混合持久化</p><p>AOF在重写AOF文件时, 将重写这一刻之前的内存rdb快照文件的内容和增量的AOF修改数据的命令,都写到新的aof文件中,当重写完成后就进行改名,覆盖之前的aof文件,完成新旧两个aof文件的替换</p></li></ul><p>开启混合持久化:<br/></p><p>​		aof-use-rdb-preamble   yes</p><p>混合持久化文件结构为:   头部rdb格式 尾部aof格式</p><p>&nbsp;</p><h4><a name='header-n287' class='md-header-anchor '></a>缓存淘汰策略</h4><blockquote><p>当Redis内存超出物理内存限制时,内存的数据就会开始和磁盘频繁的交换(虚拟内存),交换会让Redis的性能急剧下降,为了限制最大使用内存, Redis提供了配置参数maxmemory来限制内存最大大小, 当Redis使用的内存超出maxmemory时,Redis提供了8种缓存淘汰策略,可以让用户决定如何腾出空间以继续提供写服务</p></blockquote><p>&nbsp;</p><ul><li>noeviction    禁止写请求 。读, 写请求可以进行, 不会丢失数据,但会印象业务 (默认策略)</li><li>volatile-lru    淘汰设置了过期时间的最近最少使用的Key</li><li>volatile-ttl     淘汰设置了过期时间的key, ttl越小的优先淘汰</li><li>volatile-random  随机淘汰设置了过期时间的key</li><li>volatile-lfu     淘汰最少使用的设置了过期时间的key</li><li>allkeys-lru      淘汰最近最少使用的key</li><li>allkeys-lfu       淘汰最少使用的</li><li>allkeys-random   随机淘汰</li></ul><h4><a name='header-n319' class='md-header-anchor '></a>过期数据删除策略</h4><ul><li>定时删除:  当key到了过期时间立即删除          ( 影响性能)</li><li>定期删除:  每隔一段时间删除已经过期的key</li><li>惰性删除:  当访问已经过期的key时才删除</li></ul><h4><a name='header-n331' class='md-header-anchor '></a>Redis集群方案</h4><p>&nbsp;</p><h5><a name='header-n334' class='md-header-anchor '></a>主从复制(读写分离)</h5><blockquote><p>主从复制就是将master中的数据即使,有效的复制到slave中,一个master可以拥有多个slave, 一个slave只能对应一个master</p></blockquote><p>&nbsp;</p><p>职责:<br/></p><p>​	master:  写数据,执行写操作时,将出现的数据自动的同步到slave上</p><p>​       	slave:   读数据</p><p>作用: </p><p>​	读写分离, master写, slave读</p><p>​	数据冗余,实现数据的备份</p><p>​	高可用的基石, 哨兵模式,集群模式都是基于主从复制的</p><p>缺点: </p><p>​	当master挂掉之后,整个集群就无法提供写的功能,没有自动的故障转移机制</p><p>&nbsp;</p><p>配置方式</p><p>​       在slave节点的redis.conf配置:  slave        masterIp:port </p><p>&nbsp;</p><p>&nbsp;</p><h5><a name='header-n368' class='md-header-anchor '></a>哨兵模式(Sentinel)</h5><blockquote><p>哨兵(sentinel) 是一个分布式系统,用于对主从结构的每台服务器进行监控, 当出现故障时,通过投票机制选取新的master,并将所有的slave连接到新的master</p></blockquote><p>&nbsp;</p><p>哨兵作用: </p><p>​	监控: 不断的检查master和slave是否正常运行</p><p>​	通知: 当被监控的服务实例出现问题时,向其他哨兵发送通知</p><p>​	自动故障转移:  当master出现故障时,断开master与slave的连接,选取一个新的slave作为master,并将其他的s              lave连接到新的master</p><p>&nbsp;</p><p>选择master的指标</p><p>​	先剔除不在线的,响应慢的,与原master断开时间短的</p><p>​        优先选优先级高的, offset大的(数据是最新的), runid最小的</p><p>&nbsp;</p><p>哨兵的自动故障转移机制大概思路</p><p>​	当哨兵检测到master出现故暂后,首先将master的状态设为假死状态,然后通知其他的哨兵,其他的哨兵也会检测master的状态,当确定master挂掉的哨兵数量符合我们配置的数量时,此时哨兵集群就会选取一个哨兵leader,</p><p>哨兵leader负责将master的状态修改为下线状态,然后根据规则选取一个slave作为master,再通知其他的slave断开与原master的连接,将所有的slave连接到新的master</p><p>&nbsp;</p><h5><a name='header-n400' class='md-header-anchor '></a>集群模式(cluster)</h5><blockquote><p>Redis集群模式是由多个主从节点群所组的服务集群,它具有高可用,数据分片的特性</p></blockquote><p>&nbsp;</p><p>Redis不需要sentinel哨兵也可以完成自动故障转移, 并且Redis集群模式可以水平扩展,最多可以扩展16384个节点</p><p>&nbsp;</p><ul><li><p>Redis高可用集群搭建</p><p>​	修改redis.conf</p><p>​		cluster-enabled     yes    # 启用集群模式</p><p>​		cluster-config-file-nodes-ip或者端口号.conf   集群节点信息文件</p><p>​		cluster-time-out   5000         # 节点过期时间</p><p>​		protected       no                   # 关闭保护模式</p><p>​		appendonly  yes         # aof持久化</p><p>​		aof-use-rdb-preamble  yes  # 混合持久化</p><p>   		requirepass    密码               # redis访问密码</p><p>​		clusterauth     密码              # 集群密码</p><p>​    <br/></p><p> 	使用redis-cli 创建整个集群</p><p>​		redis-cli -a 集群密码  --cluster create --cluster replicas slave数量  节点1ip:port   节点2ip:port 节点3ip:port  ...</p><p>​	</p><p>​	连接集群</p><p>​		redis-cli -a 集群密码  -c   -h ip  -p port</p><p>​	添加新的节点</p><p>​		redis-cli  -a 集群密码   --cluster  add-node  新节点ip:port  已存在节点的ip:port	</p><p>​	删除节点</p><p>​		redis-cli  -a  集群密码   --cluster  del-node   已经存在节点的ip:port  要删除节点的runid</p><p>​	分配hash槽</p><p>​		redis-cli  -a 集群密码    --cluster  reshard      已经存在节点的ip:port  	[ 接下来按提示分配</p></li></ul><p><strong>Redis集群概念</strong></p><p>​	Redis集群模式将所有的数据分为16384个槽, 每一个节点负责其中的一部分槽位,槽位的信息存储于集群中每一个节点上</p><p>&nbsp;</p><p>​	当Redis Cluster的客户端来连接集群时,也会得到一份集群的槽位配置信息并将其缓存在客户端本地,当需要找到某个Key时,可以直接定位到目标节点,如果槽位信息发生变化, 就会重定向到真正的目标节点上</p><p>&nbsp;</p><p>​	槽位定位算法</p><p>​		Cluster 默认会对所有的key值使用CRC16算法再进行hash得到一个整数,再用这个整数对16384进行取模来得到具体槽位</p><p>​	跳转重定向</p><p>​		当客户端向一个节点发出了指令,该节点根据槽位定位算法发现指令的Key的槽位并不在当前节点上,这时它就会向客户端发送一个跳转指令并携带节点地址,告诉客户端去链接这个节点去进行操作,并且客户端还会同步更新本地的槽位映射表缓存</p><p>​		</p><h4><a name='header-n476' class='md-header-anchor '></a>Redis 名字介绍</h4><h5><a name='header-n500' class='md-header-anchor '></a>缓存预热</h5><p>	缓存预热就是在系统启动前,提前将相关的缓存数据直接加载到缓存系统中,避免在用户请求时,先查询数据库,然后再将数据缓存的问题,用户直接查询事先就被缓存好的数据</p><p>&nbsp;</p><h5><a name='header-n567' class='md-header-anchor '></a>缓存雪崩</h5><p>	缓存雪崩就是瞬间过期的数据量太大,导致对数据库服务器造成压力</p><p>	解决方案:<br/></p><p>		在原有的过期时间上随机再加一定的时间作为过期时间,避免大量的key在同一时间过期</p><p>&nbsp;</p><h5><a name='header-n574' class='md-header-anchor '></a>缓存击穿</h5><p>	缓存击穿就是单个高热(访问量高的)数据过期的瞬间, 数据访问量大,未命中缓存(redis), 发起了大量对同一数据的数据库访问,导致对数据库服务造成压力</p><p>	解决方案:</p><p>		将高热数据的key设置为永久有效</p><h5><a name='header-n603' class='md-header-anchor '></a>缓存穿透</h5><p>	缓存穿透就是访问了缓存和数据库中都不存在的数据,需要每次访问数据库,导致对数据库服务器造成压力</p><p>	解决方案:</p><p>		对于找不到数据的key, 进行一定时间的缓存,避免重复访问数据库</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+</body>
+</html>
