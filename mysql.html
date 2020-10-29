@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>mysql.md</title><link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}#write, body { height: auto; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write ol, #write p, #write ul { position: relative; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+.CodeMirror, .md-fences, table { text-align: left; }
+.md-reset, a:active, a:hover { outline: 0px; }
+.md-reset, .md-toc-item a { text-decoration: none; }
+.MathJax_SVG, .md-reset { float: none; direction: ltr; }
+:root { --bg-color:#ffffff; --text-color:#333333; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; word-break: normal; word-wrap: break-word; padding-bottom: 70px; white-space: pre-wrap; overflow-x: visible; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > blockquote:first-child, #write > div:first-child, #write > ol:first-child, #write > p:first-child, #write > pre:first-child, #write > table:first-child, #write > ul:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.typora-export p { white-space: normal; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+#write > figure:first-child { margin-top: 16px; }
+figure { overflow-x: auto; margin: -8px 0px 0px -8px; max-width: calc(100% + 16px); padding: 8px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; }
+.CodeMirror-line, .md-fences { break-inside: avoid; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; margin-right: 4px; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.md-fences { font-size: 0.9rem; display: block; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; vertical-align: top; background: 0px 0px; text-shadow: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; }
+.md-toc-inner, a img, img a { cursor: pointer; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: nowrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+.md-line > .md-image:only-child, p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+.mathjax-block:not(:empty)::after, .md-toc-content::after, .md-toc::after { display: none; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.MathJax_SVG, .mathjax-block .MathJax_SVG_Display { text-indent: 0px; max-width: none; max-height: none; min-height: 0px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+.md-tag { opacity: 0.5; }
+code, pre, tt { font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0px; position: relative; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; min-width: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.md-diagram-panel > svg, [lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+
+
+.CodeMirror, .CodeMirror-sizer { position: relative; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.fences-no-line-wrapping .md-fences .CodeMirror { margin-top: -30px; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-scroll, .cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta, .cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error, .cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.CodeMirror { height: auto; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; padding-bottom: 30px; height: 100%; outline: 0px; position: relative; box-sizing: content-box; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; border-right: none; width: 0px; visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background: rgb(217, 217, 217); }
+.CodeMirror-focused .CodeMirror-selected { background: rgb(215, 212, 240); }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid rgb(0, 0, 0); border-radius: 4px; color: infotext; font-family: var(--monospace); overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat-x; }
+.CodeMirror-lint-mark-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg=="); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { background-position: center center; background-repeat: no-repeat; cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-multiple { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-position: right bottom; width: 100%; height: 100%; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 20px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+body > :first-child { margin-top: 0px !important; }
+body > :last-child { margin-bottom: 0px !important; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border-width: 0px 0px 1px; border-style: none none solid; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; overflow: hidden; box-sizing: content-box; border-bottom-color: rgb(221, 221, 221); }
+body > h2:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child + h2 { margin-top: 0px; padding-top: 0px; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child { margin-top: 0px; padding-top: 0px; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 { margin-top: 0px; padding-top: 0px; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0px; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(221, 221, 221); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(204, 204, 204); margin: 0px; padding: 0px; }
+table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); }
+.md-fences, code, tt { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media screen and (min-width: 914px) {
+}
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; color: inherit; }
+.md-tag { color: inherit; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+#md-notification::before { top: 10px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+
+
+
+
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h4" data-ref="n377"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n377">Mysql</a></span><span class="md-toc-item md-toc-h4" data-ref="n4"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n4">InnoDb存储引擎</a></span><span class="md-toc-item md-toc-h5" data-ref="n10"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n10">InnoDB数据页结构</a></span><span class="md-toc-item md-toc-h6" data-ref="n15"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n15">InnoDB行结构</a></span><span class="md-toc-item md-toc-h5" data-ref="n36"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n36">InnoDB  索引</a></span><span class="md-toc-item md-toc-h5" data-ref="n46"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n46">聚簇索引</a></span><span class="md-toc-item md-toc-h5" data-ref="n55"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n55">二级索引(辅助索引)</a></span><span class="md-toc-item md-toc-h5" data-ref="n84"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n84">索引的代价</a></span><span class="md-toc-item md-toc-h5" data-ref="n93"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n93">B+ Tree 的优点</a></span><span class="md-toc-item md-toc-h5" data-ref="n108"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n108">B+ Tree 索引总结</a></span><span class="md-toc-item md-toc-h4" data-ref="n125"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n125">MyISAM 存储引擎</a></span><span class="md-toc-item md-toc-h4" data-ref="n157"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n157">执行计划 Explain</a></span><span class="md-toc-item md-toc-h4" data-ref="n257"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n257">索引优化</a></span><span class="md-toc-item md-toc-h4" data-ref="n276"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n276">Mysql事务</a></span><span class="md-toc-item md-toc-h5" data-ref="n306"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n306">隔离级别</a></span><span class="md-toc-item md-toc-h4" data-ref="n391"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n391">MVCC机制</a></span><span class="md-toc-item md-toc-h4" data-ref="n398"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n398">Mysql锁</a></span></p></div><h4><a name='header-n377' class='md-header-anchor '></a>Mysql</h4><p>&nbsp;</p><h4><a name='header-n4' class='md-header-anchor '></a>InnoDb存储引擎</h4><blockquote><p>​	在InnoDB存储引擎中，数据会存储在硬盘上，在处理数据时需要先将数据加载到内存中，读取表中的记录时，Innod存储引擎不需要一条一条的将记录从硬盘文件中读取出来，InnoDB采取的方式是: 将数据划分成若干个页，以页作为磁盘和内存之间交互的单位，InnoDB中页的大小一般为16KB，也就是说: 当需要从磁盘中读取数据时，每次都会读取16KB大小的数据到内存中，每一次也会将内存中的16KB数据写道磁盘上</p></blockquote><p>&nbsp;</p><h5><a name='header-n10' class='md-header-anchor '></a>InnoDB数据页结构</h5><p>​	页是InnoDB管理存储空间的基本单位,一页的默大小为16KB</p><p>​	</p><h6><a name='header-n15' class='md-header-anchor '></a>InnoDB行结构</h6><p>​	一页可能有一行数据或者多行数据, 一行最大容量为65535 Byte</p><p>&nbsp;</p><p>​	一行记录的数据除了我们自己定义的列的数据之外, 还会有3个隐藏的列</p><p>​		row_id:   行id, 当一张表中,如果没有手动的指定主键字段, 那么InnoDB会选取一个unique约束的字段为	  主键, 如果连unique字段都没有,那么则会为表默认的添加一个名为row_id的隐藏列作为主键，当有主键时则不会添加</p><p>​		trx_id: 事务id，表示当前行的版本记录是由哪个事务所修改的</p><p>​		roll_pointer:  指向旧版本的id</p><p>​	</p><p>​	<strong>一行记录可能有多个数据版本, 当事务开启时, 会创建一个read-view(事务快照), 并且为其分配一个全局唯一递增的事务id, 每个事务来修改一行记录时, 都会产生一个数据版本, 并且会将当前事务的id赋值给 trx_id, 同时会保留旧版本的数据日志(undo_log), 并将新版本的行记录的roll_pointer指向旧版本id, 也就是说, 一行记录可能有多个版本, 每个版本都有其trx_id, roll_pointer</strong></p><p>&nbsp;</p><p>&nbsp;</p><h5><a name='header-n36' class='md-header-anchor '></a>InnoDB  索引</h5><p>&nbsp;</p><blockquote><p>索引:  索引是帮助Mysql快速检索数据的排好序的数据结构</p><p>Innodb 的索引默认采用的数据结构为 b+ tree</p></blockquote><p>&nbsp;</p><h5><a name='header-n46' class='md-header-anchor '></a>聚簇索引</h5><p>​	按照主键值的大小排序并且索引与数据是在一起的, 叶子节点存储数据(一行记录), 非叶子节点存储主键值</p><p>​	</p><p>​	所有表中的数据都存放在聚簇索引上的叶子节点上, 聚簇索引并不需要我们手动创建, 在创建表时,  InnoDB存储引擎会自动根据主键创建聚簇索引, 在InnoDB存储引擎中, 聚簇索引就是数据的存储方式, 也就是数据即索引, 索引即数据</p><p>&nbsp;</p><h5><a name='header-n55' class='md-header-anchor '></a>二级索引(辅助索引)</h5><blockquote><p>二级索引(辅助索引):  在InnoDB中除了聚簇索引都是二级索引, 也可以称之为辅助索引, 非聚簇索引 </p></blockquote><p>&nbsp;</p><p>​	 聚簇索引只有当查询条件为主键值的时候才会生效, 因为聚簇索引的B+数中的数据都是按主键值进行排序的, 当我们想以别的字段作为查询条件时, 我们可以多创建几颗B+树, 也就是索引, 不同的B+树中的数据采用不同的规则进行排序 </p><p>​	</p><p>​	辅助索引(二级索引)特点: </p><p>​		按照指定字段的值进行排序</p><p>​		叶子节点存储的是主键的值, 非叶子节点存储索引值</p><p>​		在对二级索引(辅助索引)进行查找数据时, 先查询二级索引找到对应的主键值, 再根据主键值到聚簇索引中再获取完整的数据 --- 这个过程称之为 回表查询</p><p>&nbsp;</p><p>​	联合索引	</p><p>​		以多个字段的大小为排序规则所建立的索引(B+ Tree)称之为联合索引, 也是辅助索引</p><p> </p><pre class="md-fences md-end-block" lang="sql"> <div class="CodeMirror cm-s-inner CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px;"></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 30px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- 创建索引</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">alter</span> <span class="cm-keyword">table</span> 表名 add index  索引名称(字段1, 字段2);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- 删除索引</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">alter</span> <span class="cm-keyword">table</span> 表明 <span class="cm-keyword">drop</span> index 索引名;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- 查询索引</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">show index <span class="cm-keyword">from</span> 表名</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 142px;"></div><div class="CodeMirror-gutters" style="display: none; height: 172px;"></div></div></div></pre><p>&nbsp;</p><h5><a name='header-n84' class='md-header-anchor '></a>索引的代价</h5><p>​	① 空间上的代价   ② 时间上的代价</p><p>​	空间上的代价:  每一个索引都对应着一颗B+ Tree,随着数据量的增加,索引所占用的磁盘空间也会增加</p><p>​	时间上的代价:  索引是对数据的排序, 那么当对数据进行增删改的操作时,都需要去维护所涉及到的B+Tree索引</p><p>&nbsp;</p><h5><a name='header-n93' class='md-header-anchor '></a>B+ Tree 的优点</h5><p>​	B+ Tree 属于多路平衡搜素树, 其特点就是高度低, 一个节点能够存储多个数据, 降低IO消耗</p><p>​	B+ Tree进行全表扫描的效率高, B+ Tree全表扫描只需要对叶子节点进行遍历即可(叶子节点之间互相引用)</p><p>​	B+ Tree的节点天然有序, 其左子节点小于父节点,  右子节点大于父节点, 所以对于范围查询不需要全表扫描</p><p>​	</p><p>​	<strong>Hash 数据结构索引的缺点</strong></p><p>​		Hash索引适合于等值查询,  无法进行范围查询,因为经过hash后索引并不是有序的, 所以hash索引无法利用索引进行排序, 不支持联合索引的最左前缀匹配规则, 如果出现hash碰撞则会影响效率</p><p>​	</p><h5><a name='header-n108' class='md-header-anchor '></a>B+ Tree 索引总结</h5><p>​	每个索引都对应着一棵B+ Tree</p><p>​	索引是帮助Mysql提高查询效率快速, 检索数据的一种数据结构</p><p>​	InnoDB存储引擎会自动为主键建立聚簇索引, 索引的叶子节点存储着表中的完整记录, 非叶子节点存储主键的值</p><p>​	可以为指定的列建立二级索引(辅助索引), 二级索引的叶子节点由索引列值和主键值构成, 非叶子节点存储索引列的值, 如果需要通过二级索引来查找完整的用户记录, 则需要先通过二级索引找到主键值, 再通过主键值到聚簇索引中获取完整的用户记录 ---- 这个过程称之为 回表查询</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h4><a name='header-n125' class='md-header-anchor '></a>MyISAM 存储引擎</h4><p>&nbsp;</p><blockquote><p>MyISAM 存储引擎采用非聚簇索引, 也就是说:  索引和数据是分开的</p></blockquote><p>&nbsp;</p><p>​	数据文件:<br/></p><p>​		将表中的记录按照记录的插入顺序单独的存放在一个文件中, 称之为数据文件, 这个文件将存储表中所有		  的记录, 可以通过行号快速的访问一条记录</p><p>&nbsp;</p><p>​	索引文件:</p><p>​		MyISAM 存储引擎会将索引信息存储在一个单独的文件中, 称之为索引文件, MyISAM会为主键自动创建索引, 非叶子节点存储主键值, 叶子节点由主键和行号构成</p><p>&nbsp;</p><p>​	主键索引:  叶子节点存储主键值 + 行号, 非叶子节点存储主键值</p><p>​	二级索引:  叶子节点存储索引列值 + 行号, 非叶子节点存储索引列值</p><p>&nbsp;</p><p>​	<strong><em>在MyISAM中, 所有的索引都是二级索引, 因为都需要先从索引中获取对应的行号,在通过行号到数据文件中获取记录</em></strong></p><p>&nbsp;</p><p>&nbsp;</p><h4><a name='header-n157' class='md-header-anchor '></a>执行计划 Explain</h4><p>&nbsp;</p><pre class="md-fences md-end-block" lang="mysql"> <div class="CodeMirror cm-s-inner CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px;"></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 30px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">explain</span> <span class="cm-keyword">select</span> * <span class="cm-keyword">from</span> test;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 53px;"></div><div class="CodeMirror-gutters" style="display: none; height: 83px;"></div></div></div></pre><p>+----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | test  | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    5 |   100.00 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+</p><p>属性解析:	</p><figure><table><thead><tr><th>属性</th><th>解释</th></tr></thead><tbody><tr><td>id</td><td>每一个select 关键字都对应着一个id, id越大执行的优先级越高,相同则按照顺序执行</td></tr><tr><td>select_type</td><td>查询类型</td></tr><tr><td>table</td><td>表名</td></tr><tr><td>partitions</td><td>匹配的分区信息</td></tr><tr><td>type</td><td>访问表的方法</td></tr><tr><td>possiable_keys</td><td>可能使用到的索引</td></tr><tr><td>key</td><td>实际使用到的索引</td></tr><tr><td>key_len</td><td>实际使用到的索引长度  null 占两个1个字节 可变长度占2个字节</td></tr><tr><td>ref</td><td>所引用的对象信息</td></tr><tr><td>rows</td><td>预估所需要读取的记录条数</td></tr><tr><td>filtered</td><td>经过过滤条件过滤后剩余记录条数的百分比</td></tr><tr><td>Extra</td><td>额外信息</td></tr></tbody></table></figure><p> type 属性</p><p>​	system: 表中只有一条数据, 并且该表使用的存储引擎的统计数据是准确的(MyISAM Memory)</p><p>​	const:    根据主键或者唯一索引列与 常数进行等值匹配</p><p>​	eq_ref:   在连接查询时,  只会匹配到唯一的一条记录 (通常常见于 主键索引列, 唯一索引列)</p><p>​	ref:   在查询时, 可能会返回0条或多条数据 (常见于 普通索引)</p><p>​	range:  根据索引进行范围查询</p><p>​	index:  查询需要遍历整棵索引树</p><p>​	all: 全表扫描</p><p>&nbsp;</p><p>Extra</p><p>​	impossible where:  查询语句的where 条件永远不可能成立</p><p>​	using index:  使用覆盖索引, 查询的字段可以通过索引获取而不需要回表查询</p><p>​	using index condition:  索引下推, 在存储引擎中进行过滤条件的判断, 减少回表次数</p><p>​	using where: 使用了过滤条件查询</p><p>​	using join buffer:  在连接查询时, 使用了join buffer的内存块加快查询速度</p><p>​	using filesort:  排序的字段使用了文件排序, 在内存(记录少时)中或者磁上(记录多时)对字段的值进行排序(group by 也会用到排序)</p><p>​	using temporary:  使用到了临时表</p><p>​	</p><p>性能排序</p><p>​	<em>type:</em></p><p>​	system &gt; const &gt; eq_ref &gt; ref &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL	</p><p>​	<em>Extra:</em></p><p>​	using index &gt; using index condition &gt; using where &gt; using join buffer &gt; using filesort &gt; using temporary </p><p>&nbsp;</p><h4><a name='header-n257' class='md-header-anchor '></a>索引优化</h4><p>​	全值匹配我最爱, 最左前缀要遵守</p><p>​	带头大哥不能死, 中间兄弟不能断</p><p>​	索引列上少计算, 范围之后全失效</p><p>​	like百分写最右,   覆盖索引不写星</p><p>​	不等空值还有or,  索引失效要少用</p><p>&nbsp;</p><p>​	索引最左前缀匹配规则: </p><p>​		Mysql索引查询时会遵循最左前缀匹配规则, 也就是最左优先, 在检索数据时, 从联合索引的最左边开始匹配, 所以当我们创建一个联合索引时如key1, key2, key3, 相当于创建了key1 ; key1 key2 ; key1 key2 key3三个索引</p><p>&nbsp;</p><h4><a name='header-n276' class='md-header-anchor '></a>Mysql事务</h4><blockquote><p>事务是由一组操作所组成的一个执行单位, 这个执行单位具有ACID4种特性</p></blockquote><p>&nbsp;</p><p>​	原子性: </p><p>​		一个事务中的所有操作,要么全部成功,要么全部失败,不会结束在中间的某个环节</p><p>​	一致性: </p><p>​		在事务开始之前和事务结束之后, 数据库的数据完整性没有被破坏</p><p>​	隔离性: </p><p>​		数据库允许多个并发事务同时对数据进行读取或者修改, 隔离性可以防止多个事务并发执行时由于交叉执	              行导致的数据不一致</p><p>​	持久性: </p><p>​		事务执行结束后, 对数据的修改时永久的,即便发生故障也不会丢失</p><p>&nbsp;</p><p>   	</p><p>Mysql的事务默认为自动提交 可以通过 set autocommit=0 来关闭</p><p>​	</p><h5><a name='header-n306' class='md-header-anchor '></a>隔离级别</h5><p>​	</p><p>​	未提交读(READ UNCOMMITED):</p><p>​		一个事务可以读取到其他事务没有提交的数据</p><p>​	读已提交(READ COMMITED):</p><p>​		一个事务只能读取到其他事务已经提交的数据</p><p>​	可重复读(REPEATABLE READ):</p><p>​		一个事务第一次读取到某条记录后,即使其他事务修改了该记录的值并且已提交, 该事务再次读取时, 仍然是一样的数据, 不会每次都能读到不同的数据</p><p>​	串行化(SERIALIZABLE):
+		事务只能一个一个的执行, 不能够并发执行</p><p>&nbsp;</p><p>​	<strong>并发事务所带来的问题</strong></p><p>​		脏读:  一个事务读取到另一个事务还没有提交的数据</p><p>​		不可重复读: 一个事务对同一行数据读取了两次,却得到了不同的结果</p><p>​		幻读:  一个事务在在操作过程中进行了两次查询, 第二次查询的结果包含了第一次查询的结果中未出现的数据或者是缺少了第一次查询中出现的数据</p><p>​		</p><figure><table><thead><tr><th>隔离级别</th><th>问题</th></tr></thead><tbody><tr><td>未提交读(READ UNCOMMITED)</td><td>脏读  不可重复读  幻读</td></tr><tr><td>读已提交(READ COMMITED)</td><td>不可重复读 幻读</td></tr><tr><td>可重复读(REPEATABLE READ)</td><td>幻读(mysql中不会出现)</td></tr><tr><td>串行化(SERIALIZABLE)</td><td>null</td></tr></tbody></table></figure><p>&nbsp;</p><h4><a name='header-n391' class='md-header-anchor '></a>MVCC机制</h4><p><img src='https://juziia.github.io/mysql%E4%BA%8B%E5%8A%A1.png' alt='' /></p><p>&nbsp;</p><h4><a name='header-n398' class='md-header-anchor '></a>Mysql锁</h4><p><img src='https://juziia.github.io/mysql_lock.png' alt='ysql' /></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p> </p></div>
+</body>
+</html>
